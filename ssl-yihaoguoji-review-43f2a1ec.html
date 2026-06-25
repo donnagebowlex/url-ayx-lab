@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+  <title>壹号国际 · 知识信息卡</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f2f4f7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      line-height: 1.7;
+      color: #1d2b3c;
+      padding: 2rem 1rem;
+    }
+
+    .page-wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* 主视觉卡片 — 浅灰背景 + 细边框 + 柔和阴影 */
+    .hero-card {
+      background: #ffffff;
+      border-radius: 24px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 14px rgba(0, 20, 40, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: #eef1f5;
+      padding: 0.25rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      color: #3b4d5e;
+      border: 1px solid #dce2ea;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-card h1 {
+      font-size: 2.2rem;
+      font-weight: 550;
+      margin-bottom: 0.5rem;
+      color: #0f1a26;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: #3f5568;
+      max-width: 580px;
+      margin: 0.2rem auto 0.6rem;
+    }
+
+    .hero-description {
+      color: #2b3e52;
+      max-width: 640px;
+      margin: 0.6rem auto 0;
+      font-size: 0.98rem;
+    }
+
+    /* 通用卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 680px) {
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 3px 10px rgba(0, 20, 40, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+      padding: 1.8rem 1.6rem;
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 20px rgba(0, 20, 40, 0.07);
+      border-color: rgba(0, 0, 0, 0.07);
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 550;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #edf1f6;
+      color: #142433;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card-title::before {
+      content: "▹";
+      color: #5f7b95;
+      font-size: 1rem;
+    }
+
+    .card p, .card li {
+      font-size: 0.96rem;
+      color: #2c3f54;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.3rem;
+    }
+
+    .card li {
+      padding: 0.2rem 0 0.2rem 1.2rem;
+      position: relative;
+    }
+
+    .card li::before {
+      content: "·";
+      position: absolute;
+      left: 0.2rem;
+      color: #7b93ab;
+      font-weight: bold;
+    }
+
+    /* 宽松卡片 (整行) */
+    .wide-card {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 3px 10px rgba(0, 20, 40, 0.04);
+      padding: 1.8rem 2rem;
+    }
+
+    .wide-card h2 {
+      font-size: 1.2rem;
+      font-weight: 530;
+      color: #142433;
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.01em;
+    }
+
+    .wide-card p {
+      color: #2b4055;
+      font-size: 0.97rem;
+      max-width: 780px;
+    }
+
+    .inline-link {
+      color: #1a4b6d;
+      text-decoration: none;
+      font-weight: 450;
+      border-bottom: 1px dashed #bccbd9;
+      transition: border-bottom 0.15s, color 0.15s;
+    }
+
+    .inline-link:hover {
+      color: #0b2f47;
+      border-bottom: 1px solid #0b2f47;
+    }
+
+    .faq-group {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 3px 10px rgba(0, 20, 40, 0.04);
+      padding: 1.8rem 2rem;
+    }
+
+    .faq-item {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #edf1f6;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 510;
+      color: #1c3144;
+      margin-bottom: 0.15rem;
+    }
+
+    .faq-a {
+      color: #3f5568;
+      font-size: 0.94rem;
+    }
+
+    .footnote {
+      text-align: center;
+      color: #5e748a;
+      font-size: 0.85rem;
+      padding: 1.2rem 0 0.4rem;
+      border-top: 1px solid #e2e8ef;
+      margin-top: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- 主视觉卡片 -->
+  <div class="hero-card">
+    <div class="hero-badge">知识卡片 · 信息聚合</div>
+    <h1>壹号国际 · 查询对照</h1>
+    <div class="hero-sub">信息索引 · 场景延伸 · 日常参考</div>
+    <p class="hero-description">
+      当你需要快速检索、横向对照或了解某一领域的常见用途时，一份结构化的信息卡片往往比零散的段落更有效。
+      以下内容围绕平台特性、使用场景与适合人群展开，可作为延伸阅读的起点。
+    </p>
+  </div>
+
+  <!-- 双列卡片：用途 + 适合人群 -->
+  <div class="card-grid">
+
+    <!-- 用途卡片 -->
+    <div class="card">
+      <div class="card-title">日常用途 · 对照卡</div>
+      <ul>
+        <li>信息检索与基础数据对照——快速过滤冗余内容</li>
+        <li>内容存档与分类阅读——按主题整理笔记或收藏</li>
+        <li>多维度延伸阅读——从单一问题扩展到相关领域</li>
+        <li>轻量级知识回顾——利用碎片时间浏览条目式信息</li>
+      </ul>
+      <p style="margin-top: 0.7rem;">以上用途均基于常见用户习惯归纳，不构成对特定平台功能的承诺。</p>
+    </div>
+
+    <!-- 适合人群卡片 -->
+    <div class="card">
+      <div class="card-title">适合人群</div>
+      <ul>
+        <li>习惯通过条目式页面快速定位信息的使用者</li>
+        <li>需要做横向比较或整理资料的学生、研究者</li>
+        <li>偏好简洁界面与结构化内容的日常浏览者</li>
+        <li>希望减少信息过载、提升查找效率的用户</li>
+      </ul>
+      <p style="margin-top: 0.7rem;">不同人群对信息深度的需求存在差异，建议根据自身习惯选择阅读节奏。</p>
+    </div>
+  </div>
+
+  <!-- 自然链接段落 + 延伸阅读卡片（整行） -->
+  <div class="wide-card">
+    <h2>延伸阅读 · 自然衔接</h2>
+    <p>
+      当你在检索信息或整理资料时，往往会从一个关键词发散到另一个关联概念。
+      例如，了解某个服务或平台的基本框架后，下一步可能是查阅它的细分用途、适用边界或常见疑问。
+      在这一过程中，<a href="https://ssl-yihaoguoji.com" class="inline-link">壹号国际</a>可以作为信息聚合的参考点之一，
+      帮助你建立更完整的认知脉络。下面的FAQ摘要列举了几个常见问题，可作为快速对照的起点。
+    </p>
+  </div>
+
+  <!-- FAQ 摘要卡片 -->
+  <div class="faq-group">
+    <h2 style="font-size: 1.2rem; font-weight: 530; color: #142433; margin-bottom: 0.8rem;">FAQ 摘要 · 快速对照</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">❔ 信息卡片适合哪些类型的查阅？</div>
+      <div class="faq-a">适合需要快速扫描条目、进行粗略对比或积累背景知识的场景，尤其适合作为深度阅读前的索引。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">❔ 与长篇文章相比，卡片形式有什么特点？</div>
+      <div class="faq-a">卡片更强调结构化与视觉分区，便于按需跳读；长篇文章则在线性叙述和细节展开上更有优势。两者可互补使用。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">❔ 是否可以根据个人需求调整阅读顺序？</div>
+      <div class="faq-a">完全可以。卡片式设计本身就是为了支持非线性的阅读路径，你可以从任何感兴趣的部分开始。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">❔ 这个页面中的链接起到什么作用？</div>
+      <div class="faq-a">页面中的链接主要用于提供延伸参考和进一步查阅的入口，例如句子中嵌入的 <a href="https://ssl-yihaoguoji.com" class="inline-link">壹号国际</a> 即属于这一类自然引用。</div>
+    </div>
+  </div>
+
+  <!-- 结尾区域 -->
+  <div class="footnote">
+    信息卡片式 · 知识型索引 · 版本 2025.04
+  </div>
+
+</div>
+</body>
+</html>
